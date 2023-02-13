@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
-function DurationsComponent() {
+function Durations() {
 
     const [activeTime, setActiveTime] = useState(1);
 
@@ -25,4 +25,4 @@ function DurationsComponent() {
   );
 }
 
-export default DurationsComponent;
+export default Durations;
