@@ -1,26 +1,24 @@
+import { useState } from 'react';
 import './App.scss';
 import  Container  from 'react-bootstrap/Container';
 import NavbarComponent from './NavBar';
 import PriceHeader from './PriceHeader';
-import FooterHighPrice from './FooterHighPrice';
 import FooterComponent from './footer';
-import { Route, Routes, Link } from 'react-router-dom';
+import FooterHighPrice from './FooterHighPrice';
 
 function App() {
+  const [activePrice, setActivePrice] = useState('low')
+
   return (
     <>
    <div className = "container-wrapper pb-2">
     <Container>
       <NavbarComponent />
-      <PriceHeader />
+      <PriceHeader activePrice = {activePrice} setActivePrice = {setActivePrice}/>
       <div className='chart'></div>
     </Container>
     </div>
-    <Routes>
-      <Route path="/" element ={<FooterComponent />}/>
-      <Route path="footer" element ={<FooterHighPrice />}/>
-    </Routes>
-    
+    {activePrice === 'low' ? <FooterComponent /> : <FooterHighPrice />}
   </>
   );
 }
