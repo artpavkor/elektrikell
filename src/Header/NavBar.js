@@ -1,9 +1,9 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Logo from './logo.svg'
+import Logo from '../logo.svg'
 function NavBar() {
   return (
-      <Navbar bg="light" className='shadow-0'>
+      <Navbar bg="light">
         <Container>
           <Navbar.Brand href="#home">
             <img
