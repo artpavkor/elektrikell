@@ -5,7 +5,7 @@ body {
 }
 
 .container-wrapper {
-    background-color: white;
+    background-color: rgb(248,249,250);
 }
 .chart {
     width: 100%;
@@ -19,4 +19,15 @@ body {
 #link {
     text-decoration: none;
     color: white;
+}
+
+.span_red {
+    color: red;
+    background-color: rgba(250, 15, 23, 0.1);
+}
+
+.btn_group {
+    background-color: #F3F5FD;
+    padding: 5px 10px;
+    box-shadow: none;
 }
