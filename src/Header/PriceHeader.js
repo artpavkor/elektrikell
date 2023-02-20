@@ -1,9 +1,24 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SelectPriceType from './SelectPriceType';
+import { useEffect, useState } from 'react';
+import loadData from '../services/apiCurrentPrice';
 
  
 function PriceHeader(props) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+
+    loadData()
+      .then(({ data }) => {
+        const price = data[0].price;
+        setData(price);
+      })
+      
+  }, []);
+
+
   return (
       <Row className='mb-5'>
         <Col>
@@ -15,7 +30,7 @@ function PriceHeader(props) {
         <SelectPriceType {...props}/>
         </Col>
         <Col className='text-end'>
-        <h3 className='fs-1'>19.78</h3> 
+        <h3 className='fs-1'>{data}</h3> 
         <p>senti / kilovatt-tund</p>
         </Col>
       </Row>
