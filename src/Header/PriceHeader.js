@@ -2,15 +2,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SelectPriceType from './SelectPriceType';
 import { useEffect, useState } from 'react';
-import loadData from '../services/apiCurrentPrice';
-
+import getCurrentPrice from '../services/apiService';
  
 function PriceHeader(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
 
-    loadData()
+    getCurrentPrice()
       .then(({ data }) => {
         const price = data[0].price;
         setData(price);
