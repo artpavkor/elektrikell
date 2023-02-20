@@ -16,8 +16,8 @@ function PriceHeader(props) {
         if (!success) {
           throw message[0];
       }
-        const price = data[0].price;
-        setData(price);
+        const kwPrice = +(data[0].price / 10 * 1.2).toFixed(2) 
+        setData (kwPrice)
       })
       .catch((error) => setErrorMessage(error.toString));
       
