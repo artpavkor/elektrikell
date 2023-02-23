@@ -7,12 +7,13 @@ import FooterHighPrice from './Footer/FooterHighPrice';
 import Body from './Body/Body';
 import FooterLowPrice from './Footer/FooterLowPrice'
 // import ErrorModal from './ErrorModal';
-// import Loading from './Loading';
+import Loading from './Loading';
 
 function App() {
   const [activePrice, setActivePrice] = useState('low')
   const [hourRange, setHourRange] = useState(1);
-  // if (true) return <Loading />;
+  const [lowPriceTimestamp, setLowPriceTimestamp] = useState(0);
+  // if (!lowPriceTimestamp) return <Loading />;
   // if(true) return <ErrorModal handleClose = {() => {}} errorMessage = "Osibka dostupa" />;
 
   return (
@@ -21,10 +22,11 @@ function App() {
     <Container>
       <NavBar />
       <PriceHeader activePrice = {activePrice} setActivePrice = {setActivePrice}/>
-      <Body hourRange = {hourRange} />
+      <Body hourRange = {hourRange} activePrice = {activePrice} setLowPriceTimestamp = {setLowPriceTimestamp} />
     </Container>
     </div>
-    {activePrice === 'low' ? <FooterLowPrice hourRange={hourRange} setHourRange={setHourRange} /> : <FooterHighPrice />}
+    {activePrice === 'low' ? <FooterLowPrice hourRange={hourRange} setHourRange={setHourRange} lowPriceTimestamp = {lowPriceTimestamp}/> : <FooterHighPrice />}
+    {lowPriceTimestamp && <Loading />}
   </>
   );
 }

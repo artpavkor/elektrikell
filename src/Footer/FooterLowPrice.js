@@ -8,7 +8,7 @@ function FooterLowPrice(props) {
             <div><Durations {...props} /></div> 
             <div>Parim aeg</div>
             <div>
-            <Countdown date={Date.now() + 100000} />
+               {props.lowPriceTimestamp && <Countdown date={props.lowPriceTimestamp * 1000} />}
             </div> 
             <div>Siin on</div> 
         </Container>
