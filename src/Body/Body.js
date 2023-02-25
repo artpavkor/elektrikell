@@ -22,7 +22,8 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
   const [xHign, setXHign] = useState([]);
 
   useEffect(() => {
-    getPriceData()
+    setTimeout(() => {
+      getPriceData()
       .then(({ success, data, message }) => {
         if (!success) {
           throw message[0];
@@ -38,6 +39,8 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
         setData(newData);
       })
       .catch((error) => setErrorMessage(error.toString));
+    }, 1800);
+   
   }, []);
 
   useEffect(() => {

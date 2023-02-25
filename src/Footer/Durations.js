@@ -11,7 +11,7 @@ function Durations({hourRange, setHourRange}) {
     <ButtonToolbar aria-label="Toolbar with button groups" className='justify-content-center'>
       <ButtonGroup aria-label="First group">
         {buttons.map(time => (
-            <Button 
+            <Button
                 key={time} 
                 active={time === hourRange} 
                 onClick = {() => setHourRange(time)}>

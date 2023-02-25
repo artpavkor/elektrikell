@@ -13,7 +13,6 @@ function App() {
   const [activePrice, setActivePrice] = useState('low')
   const [hourRange, setHourRange] = useState(1);
   const [lowPriceTimestamp, setLowPriceTimestamp] = useState(0);
-  // if (!lowPriceTimestamp) return <Loading />;
   // if(true) return <ErrorModal handleClose = {() => {}} errorMessage = "Osibka dostupa" />;
 
   return (
@@ -26,7 +25,7 @@ function App() {
     </Container>
     </div>
     {activePrice === 'low' ? <FooterLowPrice hourRange={hourRange} setHourRange={setHourRange} lowPriceTimestamp = {lowPriceTimestamp}/> : <FooterHighPrice />}
-    {lowPriceTimestamp && <Loading />}
+    {!lowPriceTimestamp && <Loading />} 
   </>
   );
 }
