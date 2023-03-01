@@ -29,6 +29,7 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
   const [searchDate, setSearchDate] = useState({
     start, end, pastHours
   });
+
 // ----------------------------------------------------------------
   useEffect(() => {
     setTimeout(() => {
@@ -94,7 +95,7 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
         </LineChart>
       </ResponsiveContainer>
       <Button className="outline-secondary" size="sm" onClick={() => setShowForm(true)}>
-         mara kuupaevad
+        Mara kuupäevad
       </Button>
       <DateForm show={showForm} setShow={setShowForm} setSearchDate={setSearchDate} />
       <ErrorModal
