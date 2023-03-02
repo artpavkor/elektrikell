@@ -1,33 +1,17 @@
-import { useState } from 'react';
-import './App.scss';
-import  Container  from 'react-bootstrap/Container';
-import NavBar from './Header/NavBar';
-import PriceHeader from './Header/PriceHeader';
-import FooterHighPrice from './Footer/FooterHighPrice';
-import Body from './Body/Body';
-import FooterLowPrice from './Footer/FooterLowPrice'
-// import ErrorModal from './ErrorModal';
-import Loading from './Loading';
+import  { Routes, Route }  from "react-router-dom";
+import About from "./About";
+import ElektriKell from "./ElektriKell";
 
-function App() {
-  const [activePrice, setActivePrice] = useState('low')
-  const [hourRange, setHourRange] = useState(1);
-  const [lowPriceTimestamp, setLowPriceTimestamp] = useState(0);
-  // if(true) return <ErrorModal handleClose = {() => {}} errorMessage = "Osibka dostupa" />;
 
-  return (
-    <>
-   <div className = "container-wrapper pb-2">
-    <Container>
-      <NavBar />
-      <PriceHeader activePrice = {activePrice} setActivePrice = {setActivePrice}/>
-      <Body hourRange = {hourRange} activePrice = {activePrice} setLowPriceTimestamp = {setLowPriceTimestamp} />
-    </Container>
-    </div>
-    {activePrice === 'low' ? <FooterLowPrice hourRange={hourRange} setHourRange={setHourRange} lowPriceTimestamp = {lowPriceTimestamp}/> : <FooterHighPrice />}
-    {!lowPriceTimestamp && <Loading />} 
-  </>
-  );
+function App () {
+    return (
+        <Routes>
+            <Route path="/" element = {<ElektriKell />} />
+            <Route path="/:activePrice" element = {<ElektriKell />} />
+            <Route path="/about" element = {<About />} />
+        </Routes>
+    );
 }
+
 
 export default App;
