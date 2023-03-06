@@ -23,7 +23,7 @@ function About() {
                             <h1 className="display-4 fw-bold lh-1 name">Artem Korniienko</h1>
 
                             <p><b>Address:</b> Tallinn, Estonia<br></br>
-                                <b>Email:</b> artpavkor.gmail.com <br></br>
+                                <b>Email:</b> artpavkor@gmail.com <br></br>
                                 <b>Phone:</b> 123-456-789</p>
 
                             <p className="lead">Development experience with ReactJS, Redux, GraphQL and other modern technologies.

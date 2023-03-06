@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import {
-  ResponsiveContainer,
-  LineChart,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -29,15 +27,15 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
     start, end, pastHours
   });
 
-// ----------------------------------------------------------------
   useEffect(() => {
     setTimeout(() => {
       getPriceData(searchDate)
 
-        .then(({ success, data, message }) => { 
+        .then(({ success, data, message }) => {
 
-          if (!success) { 
-            throw message[0] } 
+          if (!success) {
+            throw message[0]
+          }
 
           const newData = data.ee.map((d) => {
 
@@ -55,28 +53,33 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
     }, 1800);
   }, [searchDate]);
 
+  const chartsChildren = (
+    <>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="hour" />
+      <YAxis />
+      <Tooltip />
+      <Line type="monotone" dataKey="price" stroke="#8884d8" />
+      <ReferenceLine x={data?.findIndex((el) => el.current)} stroke="red" />
+
+    </>
+  )
+
   return (
     <>
-      <ResponsiveContainer width="100%" height={400}>
-        <LineChart
-          data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="hour" />
-          <YAxis />
-          <Tooltip />
-          <Line type="monotone" dataKey="price" stroke="#8884d8" />
-          <ReferenceLine x={data?.findIndex((el) => el.current)} stroke="red" />
-          {activePrice === "high"
-            ? AreaHign({ data })
-            : AreaLow({ data, hourRange, setLowPriceTimestamp, searchDate })}
-        </LineChart>
-      </ResponsiveContainer>
+      {activePrice === "high"
+        ? <AreaHign data={data}>
+          {chartsChildren}
+        </AreaHign>
+        :
+        <AreaLow {...{ data, hourRange, setLowPriceTimestamp, searchDate }}>
+          {chartsChildren}
+        </AreaLow>
+      }
       <div className="d-flex justify-content-center mb-2">
-      <Button className="outline-secondary" size="sm" onClick={() => setShowForm(true)}>
-        Mara kuupäevad
-      </Button>
+        <Button className="outline-secondary" size="sm" onClick={() => setShowForm(true)}>
+          Mara kuupäevad
+        </Button>
       </div>
       <DateForm show={showForm} setShow={setShowForm} setSearchDate={setSearchDate} />
       <ErrorModal

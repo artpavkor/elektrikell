@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { ReferenceArea } from "recharts";
+import { ReferenceArea, ResponsiveContainer, LineChart } from "recharts";
 import { rangePricesGenerate } from "../helpers/rangePrices";
 
 
-function AreaHign ({ data }) {
+function AreaHign ({ data, children }) {
    
     const [xHign, setXHign] = useState(null);
-
+   
     useEffect (() => {
         if(!data) return;
         const rangePrices = rangePricesGenerate(data);
@@ -16,15 +16,30 @@ function AreaHign ({ data }) {
         half.forEach(v => {
           sum += v.sum;
         });
-        let avereage = sum/half.length;
+        let avereage = sum / half.length;
         half.filter(v => v.sum > avereage)
         setXHign(half.filter(v => v.sum > avereage));
         
     }, [data]);
 
-    return xHign?.length ? xHign.map(x => 
-        <ReferenceArea key={x.i} x1={x.i + 10} x2={x.i + 10 + 1} stroke="red" fill="red" strokeOpacity={0.3} fillOpacity={0.3} />
-        ) : <></>;
+    const currentIndex = data?.findIndex((el) => el.current);
+
+    return (
+      <ResponsiveContainer width="100%" height={400}>
+      <LineChart data={data}>
+        {children} 
+        {xHign?.length ? xHign.map(x => 
+        <ReferenceArea key={x.i} 
+        x1={x.i + currentIndex} 
+        x2={x.i + currentIndex + 1} 
+        stroke="red" 
+        fill="red" 
+        strokeOpacity={0.3}
+        fillOpacity={0.3} />
+        ) : null}
+       </LineChart>
+   </ResponsiveContainer>
+    )
 }
 
 export default AreaHign;

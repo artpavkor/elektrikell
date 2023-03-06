@@ -4,7 +4,7 @@ export const rangePricesGenerate = (data, hourRange = 1) => {
 
         const timestampNow = moment().unix();
         const futureData = data.filter((el) => el.timestamp > timestampNow);
-        const hourRangeLocal = hourRange;
+        const hourRangeLocal = hourRange + 1;
   
         const rangePrices = [];
   
@@ -16,6 +16,7 @@ export const rangePricesGenerate = (data, hourRange = 1) => {
             rangePrices.push({ sum, i, timestamp: v.timestamp });
           }
         });
+        
         rangePrices.sort((a, b) => a.sum - b.sum);
 
         return rangePrices;
