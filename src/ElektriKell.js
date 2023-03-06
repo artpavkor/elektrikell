@@ -27,7 +27,7 @@ function ElektriKell() {
     <>
    <div className = "container-wrapper pb-2">
     {/* Д.з */}
-    <Container className='text-center'>
+    <Container>
         {/* Д.з */}
       <NavBar />
       <PriceHeader activePrice = {activePrice} setActivePrice = {setActivePrice}/>

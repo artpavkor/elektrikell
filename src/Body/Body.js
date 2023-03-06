@@ -37,7 +37,7 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
         .then(({ success, data, message }) => { 
 
           if (!success) { 
-            throw message[0] }
+            throw message[0] } 
 
           const newData = data.ee.map((d) => {
 
@@ -73,9 +73,11 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
             : AreaLow({ data, hourRange, setLowPriceTimestamp, searchDate })}
         </LineChart>
       </ResponsiveContainer>
+      <div className="d-flex justify-content-center mb-2">
       <Button className="outline-secondary" size="sm" onClick={() => setShowForm(true)}>
         Mara kuupäevad
       </Button>
+      </div>
       <DateForm show={showForm} setShow={setShowForm} setSearchDate={setSearchDate} />
       <ErrorModal
         errorMessage={errorMessage}

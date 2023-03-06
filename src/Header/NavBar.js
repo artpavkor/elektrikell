@@ -1,29 +1,32 @@
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
 import Logo from '../logo.svg';
-import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
   return (
-    <Navbar bg="light">
+    <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="#home"> <img
+              src={Logo}
+              height="30px"
+              className="d-inline-block align-top"
+              alt="logo"
+            /></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/about" className='nav-link'>Minust</Link>
-            <Link to="/hign" className='nav-link'>Tipptund</Link>
+              <Link to="/about" className='nav-link'>Minust</Link>
+              <Link to="/hign" className='nav-link'>Tipptund</Link>
           </Nav>
-          <img
-            src={Logo}
-            height="30px"
-            className="d-inline-block align-top"
-            alt="logo"
-          />
-        </Navbar.Brand>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
 
-
 export default NavBar;
+
+

@@ -7,11 +7,10 @@ import moment from "moment";
 import { useState } from "react";
 
 function DateForm({ show, setShow, setSearchDate }) {
-  const[errorMessage, setErrorMessage] = useState (null)
+  const[errorMessage, setErrorMessage] = useState (null);
   const handleClose = () => setShow(false);
 
   const handleSubmit = (event) => {
-    // console.log(moment().format());
     event.preventDefault();
 
     let start = event.target.start.value;
@@ -20,17 +19,20 @@ function DateForm({ show, setShow, setSearchDate }) {
     const currentDate = moment();
 
     if(!start || !end) {
-      setErrorMessage('Ag ja Loop kuupaev paevad olema maaratud');
+      setErrorMessage('Alg ja Loop kuupaevad paevad olema maaratud');
       return;
     }
+
     if(currentDate.isBefore(start)) {
-      setErrorMessage('Alg kuupaev paeb olema mineivikus');
+      setErrorMessage('Alg kuupaev peab olema minevikus');
       return;
     }
+
     if(currentDate.isAfter(end)) {
-      setErrorMessage('Lopp kuupaev paeb olema tulevikus');
+      setErrorMessage('Lopp kuupaev peab olema tulevikus');
       return;
     };
+
     start = moment(start);
     end =moment (end);
 
@@ -42,44 +44,33 @@ function DateForm({ show, setShow, setSearchDate }) {
     setSearchDate({
       start: start.format(),
       end: end.format(),
-      pastHours: currentDate.diff(start, "hours"),
+      pastHours: currentDate.diff(start, 'hours'),
     });
   };
 
-
-  // const startTime = moment().subtract(1, "days").format("YYYY-MM-DDTHH:mm");
-  // const endTime = moment().add(1, "days").format("YYYY-MM-DDTHH:mm");
 
   return ( 
     <>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Valige aeg</Offcanvas.Title>
+          <Offcanvas.Title>Mara kuupäevad</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Alguspäev</Form.Label>
+              <Form.Label>Alg. kuupäev</Form.Label>
               <Form.Control
                 name="start"
-                // onInvalid={e => e.target.setCustomValidity('Sisestage väärtus')}
-                // onInput={e => e.target.setCustomValidity('')}
                 type="datetime-local"
                 placeholder="start date"
-                // max={startTime}
-                // required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Lõppkuupäev</Form.Label>
               <Form.Control
                 name="end"
-                // onInvalid={e => e.target.setCustomValidity('Sisestage väärtus')}
-                // onInput={e => e.target.setCustomValidity('')}
                 type="datetime-local"
                 placeholder="end date"
-                // min={endTime}
-                // required
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="w-100">
