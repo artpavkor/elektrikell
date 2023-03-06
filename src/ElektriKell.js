@@ -26,9 +26,7 @@ function ElektriKell() {
   return (
     <>
    <div className = "container-wrapper pb-2">
-    {/* Д.з */}
     <Container>
-        {/* Д.з */}
       <NavBar />
       <PriceHeader activePrice = {activePrice} setActivePrice = {setActivePrice}/>
       <Body hourRange = {hourRange} activePrice = {activePrice} setLowPriceTimestamp = {setLowPriceTimestamp} />

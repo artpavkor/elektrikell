@@ -41,3 +41,17 @@ body {
  .logo_loading {
     color: #1124D1;
  } 
+
+ .about {
+    background-color: #ffffff;
+ }
+
+
+ .fade-in-text {
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+  }
+  
+  .fade-in-text.is-visible {
+    opacity: 1;
+  }
