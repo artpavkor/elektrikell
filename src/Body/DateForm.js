@@ -41,7 +41,7 @@ function DateForm({ setSearchDate }) {
     end = moment(end);
 
     if (start.diff(end, 'days') >= 1) {
-      setErrorMessage('Alg ja Loop kuupaeva vahe paeb olema rohkem kui 1 paev');
+      dispatch(setErrorMessage('Alg ja Loop kuupaeva vahe paeb olema rohkem kui 1 paev'));
       return;
     }
 

@@ -13,7 +13,6 @@ import AreaLow from "./AreaLow";
 import AreaHign from "./AreaHigh";
 import Button from "react-bootstrap/Button";
 import DateForm from "./DateForm";
-import ErrorModal from "../ErrorModal";
 import { useDispatch } from "react-redux";
 import { setShowForm } from "../services/stateService";
 import { setErrorMessage } from "../services/stateService";
@@ -85,7 +84,6 @@ function Body({ activePrice }) {
         </Button>
       </div>
       <DateForm setSearchDate={setSearchDate} />
-      <ErrorModal />
     </>
   );
 }
