@@ -13,9 +13,6 @@ function ElektriKell() {
   const params = useParams;
 
   const [activePrice, setActivePrice] = useState('low')
-  const [hourRange, setHourRange] = useState(1);
-  const [lowPriceTimestamp, setLowPriceTimestamp] = useState(0);
-
 
   useEffect(() => {
     params.activePrice && setActivePrice(params.activePrice);
@@ -27,11 +24,11 @@ function ElektriKell() {
         <Container>
           <NavBar />
           <PriceHeader activePrice={activePrice} setActivePrice={setActivePrice} />
-          <Body hourRange={hourRange} activePrice={activePrice} setLowPriceTimestamp={setLowPriceTimestamp} />
+          <Body activePrice={activePrice} />
         </Container>
       </div>
-      {activePrice === 'low' ? <FooterLowPrice hourRange={hourRange} setHourRange={setHourRange} lowPriceTimestamp={lowPriceTimestamp} /> : <FooterHighPrice />}
-      {!lowPriceTimestamp && <Loading />}
+      {activePrice === 'low' ? <FooterLowPrice /> : <FooterHighPrice />}
+      <Loading />
     </>
   );
 }

@@ -19,13 +19,14 @@ const pastHours = 10;
 const start = moment().subtract(pastHours, 'hours').format();
 const end = moment().add(30, 'hours').format();
 
-function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
+function Body({ activePrice }) {
   const [data, setData] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [searchDate, setSearchDate] = useState({
     start, end, pastHours
   });
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -72,7 +73,7 @@ function Body({ hourRange, activePrice, setLowPriceTimestamp }) {
           {chartsChildren}
         </AreaHign>
         :
-        <AreaLow {...{ data, hourRange, setLowPriceTimestamp, searchDate }}>
+        <AreaLow {...{ data, searchDate }}>
           {chartsChildren}
         </AreaLow>
       }
