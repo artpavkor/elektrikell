@@ -8,25 +8,28 @@ import {
   ReferenceLine,
 } from "recharts";
 import { getPriceData } from "../services/apiService";
-import ErrorModal from "../ErrorModal";
 import moment from "moment";
 import AreaLow from "./AreaLow";
 import AreaHign from "./AreaHigh";
 import Button from "react-bootstrap/Button";
 import DateForm from "./DateForm";
+import ErrorModal from "../ErrorModal";
+import { useDispatch } from "react-redux";
+import { setShowForm } from "../services/stateService";
+import { setErrorMessage } from "../services/stateService";
 
 const pastHours = 10;
 const start = moment().subtract(pastHours, 'hours').format();
 const end = moment().add(30, 'hours').format();
 
 function Body({ activePrice }) {
+  
   const [data, setData] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [showForm, setShowForm] = useState(false);
   const [searchDate, setSearchDate] = useState({
     start, end, pastHours
   });
 
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,9 +53,9 @@ function Body({ activePrice }) {
 
           setData(newData);
         })
-        .catch((error) => setErrorMessage(error.toString));
+        .catch((error) => dispatch (setErrorMessage(error.toString)));
     }, 1800);
-  }, [searchDate]);
+  }, [searchDate, dispatch]);
 
   const chartsChildren = (
     <>
@@ -62,7 +65,6 @@ function Body({ activePrice }) {
       <Tooltip />
       <Line type="monotone" dataKey="price" stroke="#8884d8" />
       <ReferenceLine x={data?.findIndex((el) => el.current)} stroke="red" />
-
     </>
   )
 
@@ -78,15 +80,12 @@ function Body({ activePrice }) {
         </AreaLow>
       }
       <div className="d-flex justify-content-center mb-2">
-        <Button className="outline-secondary" size="sm" onClick={() => setShowForm(true)}>
+        <Button className="outline-secondary" size="sm" onClick={() => dispatch(setShowForm(true))}>
           Mara kuupäevad
         </Button>
       </div>
-      <DateForm show={showForm} setShow={setShowForm} setSearchDate={setSearchDate} />
-      <ErrorModal
-        errorMessage={errorMessage}
-        handleClose={() => setErrorMessage(null)}
-      />
+      <DateForm setSearchDate={setSearchDate} />
+      <ErrorModal />
     </>
   );
 }

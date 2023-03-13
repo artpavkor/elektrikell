@@ -1,16 +1,17 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SelectPriceType from './SelectPriceType';
-import ErrorModal from "../ErrorModal";
 import { useEffect, useState } from 'react';
 import getCurrentPrice from '../services/apiService';
+import { setErrorMessage } from "../services/stateService";
+import { useDispatch } from 'react-redux';
  
 function PriceHeader(props) {
+  
   const [data, setData] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-
     getCurrentPrice()
       .then(( { success, data, message }) => {
         if (!success) {
@@ -19,9 +20,9 @@ function PriceHeader(props) {
         const kwPrice = +(data[0].price / 10 * 1.2).toFixed(2) 
         setData (kwPrice)
       })
-      .catch((error) => setErrorMessage(error.toString));
+      .catch((error) => dispatch(setErrorMessage(error.toString)));
       
-  }, []);
+  }, [dispatch]);
 
 
   return (
@@ -40,7 +41,6 @@ function PriceHeader(props) {
         <p>senti / kilovatt-tund</p>
         </Col>
       </Row>
-      <ErrorModal errorMessage={errorMessage} handleClose={() => setErrorMessage(null)}/>
       </>
   );
 }

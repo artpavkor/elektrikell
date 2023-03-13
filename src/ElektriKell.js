@@ -10,8 +10,8 @@ import Loading from './Loading';
 import { useParams } from 'react-router-dom';
 
 function ElektriKell() {
-  const params = useParams;
 
+  const params = useParams;
   const [activePrice, setActivePrice] = useState('low')
 
   useEffect(() => {
