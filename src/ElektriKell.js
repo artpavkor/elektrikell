@@ -8,7 +8,7 @@ import Body from './Body/Body';
 import FooterLowPrice from './Footer/FooterLowPrice'
 import Loading from './Loading';
 import { useParams } from 'react-router-dom';
-import ErrorModal from "./ErrorModal";
+import ErrorModal from './ErrorModal';
 
 function ElektriKell() {
 
