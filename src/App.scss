@@ -1,12 +1,13 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 body {
     background-color: $blue-100;
 }
 
 .container-wrapper {
-    background-color: rgb(248,249,250);
+    background-color: rgb(248, 249, 250);
 }
+
 .chart {
     width: 100%;
     height: 450px;
@@ -16,6 +17,7 @@ body {
 .navbar-brand {
     color: $primary;
 }
+
 #link {
     text-decoration: none;
     color: white;
@@ -31,27 +33,28 @@ body {
     padding: 5px 10px;
     box-shadow: none;
 }
+
 .background_loading {
     background-color: #F3F5FD;
     z-index: 2;
     height: 100vh;
     width: 100vw;
- }
+}
 
- .logo_loading {
+.logo_loading {
     color: #1124D1;
- } 
+}
 
- .about {
+.about {
     background-color: #ffffff;
- }
+}
 
 
- .fade-in-text {
+.fade-in-text {
     opacity: 0;
     transition: opacity 3s ease-in-out;
-  }
-  
-  .fade-in-text.is-visible {
+}
+
+.fade-in-text.is-visible {
     opacity: 1;
-  }
+}

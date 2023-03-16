@@ -1,7 +1,7 @@
-import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 
 const initaState = {
-    hourRange: 1, 
+    hourRange: 1,
     lowPriceTimestamp: null,
     showForm: false,
     errorMessage: null,
@@ -13,9 +13,8 @@ export const setShowForm = createAction("setShowForm");
 export const setErrorMessage = createAction("setErrorMessage");
 export const setSearchDate = createAction("setSearchDate")
 
-
 const reducer = createReducer(initaState, {
-    
+
     [setHourRange]: (state, action) => {
         state.hourRange = action.payload;
     },
@@ -32,9 +31,9 @@ const reducer = createReducer(initaState, {
         state.errorMessage = action.payload
     },
 
-    [setSearchDate] : (state, action) => {
+    [setSearchDate]: (state, action) => {
         state.searchDate = action.payload
     }
 });
 
-export const store = configureStore({reducer});
+export const store = configureStore({ reducer });

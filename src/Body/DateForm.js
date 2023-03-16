@@ -1,16 +1,16 @@
-import React from "react";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import moment from "moment";
-import { useSelector, useDispatch } from "react-redux";
-import { setShowForm } from "../services/stateService";
-import { setErrorMessage } from "../services/stateService";
+import React from 'react';
+import moment from 'moment';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { setShowForm } from '../services/stateService';
+import { setErrorMessage } from '../services/stateService';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 function DateForm({ setSearchDate }) {
-  const handleClose = () => dispatch(setShowForm(false));
 
+  const handleClose = () => dispatch(setShowForm(false));
   const show = useSelector((state) => state.showForm);
   const dispatch = useDispatch();
 
@@ -23,17 +23,17 @@ function DateForm({ setSearchDate }) {
     const currentDate = moment();
 
     if (!start || !end) {
-      dispatch(setErrorMessage('Alg ja Loop kuupaevad paevad olema maaratud'));
+      dispatch(setErrorMessage("Alg ja Loop kuupaevad paevad olema maaratud"));
       return;
     }
 
     if (currentDate.isBefore(start)) {
-      dispatch(setErrorMessage('Alg kuupaev peab olema minevikus'));
+      dispatch(setErrorMessage("Alg kuupaev peab olema minevikus"));
       return;
     }
 
     if (currentDate.isAfter(end)) {
-      dispatch(setErrorMessage('Lopp kuupaev peab olema tulevikus'));
+      dispatch(setErrorMessage("Lopp kuupaev peab olema tulevikus"));
       return;
     };
 
@@ -41,7 +41,7 @@ function DateForm({ setSearchDate }) {
     end = moment(end);
 
     if (start.diff(end, 'days') >= 1) {
-      dispatch(setErrorMessage('Alg ja Loop kuupaeva vahe paeb olema rohkem kui 1 paev'));
+      dispatch(setErrorMessage("Alg ja Loop kuupaeva vahe paeb olema rohkem kui 1 paev"));
       return;
     }
 
@@ -49,7 +49,7 @@ function DateForm({ setSearchDate }) {
       start: start.format(),
       end: end.format(),
       pastHours: currentDate.diff(start, 'hours'),
-    });
+    })
   };
 
   return (
@@ -82,7 +82,6 @@ function DateForm({ setSearchDate }) {
           </Form>
         </Offcanvas.Body>
       </Offcanvas>
-      {/* <ErrorModal /> */}
     </>
   );
 }

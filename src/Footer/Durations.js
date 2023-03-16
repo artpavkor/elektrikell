@@ -26,7 +26,7 @@ function Durations() {
     <ButtonToolbar aria-label="Toolbar with button groups" className='justify-content-center'>
       <ButtonGroup aria-label="First group">
         {durations.map(duration => {
-          const selectedDuration = durationParam ? +durationParam : hourRange
+          const selectedDuration = durationParam ? + durationParam : hourRange
           return (
             <Button
               key={duration}
@@ -34,7 +34,6 @@ function Durations() {
               onClick={() => handleClick(duration)}>
               {duration}h
             </Button>
-
           )
         }
         )}

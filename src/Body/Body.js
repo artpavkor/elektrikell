@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   CartesianGrid,
   XAxis,
@@ -6,27 +6,25 @@ import {
   Tooltip,
   Line,
   ReferenceLine,
-} from "recharts";
-import { getPriceData } from "../services/apiService";
-import moment from "moment";
-import AreaLow from "./AreaLow";
-import AreaHign from "./AreaHigh";
-import Button from "react-bootstrap/Button";
-import DateForm from "./DateForm";
-import { useDispatch } from "react-redux";
-import { setShowForm } from "../services/stateService";
-import { setErrorMessage } from "../services/stateService";
+} from 'recharts';
+import moment from 'moment';
+import Button from 'react-bootstrap/Button';
+import DateForm from './DateForm';
+import AreaHign from './AreaHigh';
+import AreaLow from './AreaLow';
+import { getPriceData } from '../services/apiService';
+import { setShowForm } from '../services/stateService';
+import { setErrorMessage } from '../services/stateService';
+import { useDispatch } from 'react-redux';
 
 const pastHours = 10;
 const start = moment().subtract(pastHours, 'hours').format();
 const end = moment().add(30, 'hours').format();
 
 function Body({ activePrice }) {
-  
+
   const [data, setData] = useState(null);
-  const [searchDate, setSearchDate] = useState({
-    start, end, pastHours
-  });
+  const [searchDate, setSearchDate] = useState({ start, end, pastHours });
 
   const dispatch = useDispatch();
 
@@ -35,7 +33,6 @@ function Body({ activePrice }) {
       getPriceData(searchDate)
 
         .then(({ success, data, message }) => {
-
           if (!success) {
             throw message[0]
           }
@@ -48,12 +45,12 @@ function Body({ activePrice }) {
               hour: moment.unix(d.timestamp).hour(),
               current: moment().isSame(moment.unix(d.timestamp), "hour"),
             }
-          });
-
+          })
           setData(newData);
         })
-        .catch((error) => dispatch (setErrorMessage(error.toString)));
-    }, 1800);
+        .catch((error) => dispatch(setErrorMessage(error.toString)));
+    }, 1800)
+
   }, [searchDate, dispatch]);
 
   const chartsChildren = (
@@ -66,7 +63,6 @@ function Body({ activePrice }) {
       <ReferenceLine x={data?.findIndex((el) => el.current)} stroke="red" />
     </>
   )
-
   return (
     <>
       {activePrice === "high"

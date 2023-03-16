@@ -1,8 +1,7 @@
-import NavBar from "./Header/NavBar";
+import NavBar from './Header/NavBar';
 import Picture from './125740.png';
 import Accordion from 'react-bootstrap/Accordion';
-import { useState, useEffect } from "react";
-
+import { useState, useEffect } from 'react';
 
 function About() {
 
@@ -21,11 +20,9 @@ function About() {
                     <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
                         <div className={`fade-in-text ${isVisible ? 'is-visible' : ''}`}>
                             <h1 className="display-4 fw-bold lh-1 name">Artem Korniienko</h1>
-
                             <p><b>Address:</b> Tallinn, Estonia<br></br>
                                 <b>Email:</b> artpavkor@gmail.com <br></br>
                                 <b>Phone:</b> 123-456-789</p>
-
                             <p className="lead">Development experience with ReactJS, Redux, GraphQL and other modern technologies.
                                 Knowledge of JavaScript, HTML, CSS.
                                 Strong knowledge of Git, Webpack, Babel, Node.js and other tools.
