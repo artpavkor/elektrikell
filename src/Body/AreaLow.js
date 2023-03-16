@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setLowPriceTimestamp } from '../services/stateService';
 
 
-
 function AreaLow({ data, searchDate, children }) {
   const { durationParam } = useParams();
   const [x, setX] = useState(0);

@@ -12,6 +12,9 @@ import { useParams } from 'react-router-dom';
 
 function ElektriKell() {
 
+  // useParams это хук от react-router-dom который слушает переданные ему параметры с ссылке и назначает из всех в один обьект
+  // при получению новых параметров инициализируеться рендер новых компонентов
+
   const params = useParams;
   const [activePrice, setActivePrice] = useState('low')
 
