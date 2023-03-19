@@ -1,70 +1,173 @@
-# Getting Started with Create React App
+# Elektrikell app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![visual code](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![visual code](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![visual code](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![visual code](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)
+![visual code](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+![visual code](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![visual code](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-## Available Scripts
+Веб-приложение, разработанное на [React.js](https://github.com/reactjs) с использованием библиотек [Moment.js](https://momentjs.com/), [Recharts](https://recharts.org/), [React Router](https://reactrouter.com/en/main) и [Redux Toolkit](https://redux-toolkit.js.org/), которое позволяет пользователю просматривать цену на электроэнергию в определенное время и выбирать диапазон времени, чтобы увидеть самое низкое и самое высокое время цены на электроэнергию.
 
-In the project directory, you can run:
+В проекте также использовались [Sass](https://sass-lang.com/) и [Bootstrap](https://getbootstrap.com/) для стилизации интерфейса, а также асинхронные запросы API с сайта [elering.ee](elering.ee) для получения данных о цене на электроэнергию.
 
-### `npm start`
+## **В проекте используются следующие библиотеки и фреймворки:**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ### Использование библиотек `Moment.js` для работы с датами и временем.
+  > _Moment.js - это библиотека для работы с датами и временем в JavaScript. Она позволяет удобно парсить, форматировать, сравнивать и манипулировать датами и временем. Библиотека легко настраивается и имеет обширную документацию._
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```jsx
+import moment from 'moment';
 
-### `npm test`
+export const rangePricesGenerate = (data, hourRange = 1) => {
+  const timestampNow = moment().unix();
+  const futureData = data.filter((el) => el.timestamp > timestampNow);
+  const hourRangeLocal = hourRange + 1;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  const rangePrices = [];
 
-### `npm run build`
+  futureData.forEach((v, i, arr) => {
+    const range = arr.slice(i, i + hourRangeLocal);
+    if (range.length === hourRangeLocal) {
+      let sum = 0;
+      range.forEach((v) => (sum += v.price));
+      rangePrices.push({ sum, i, timestamp: v.timestamp });
+    }
+  });
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  rangePrices.sort((a, b) => a.sum - b.sum);
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  return rangePrices;
+};
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ### Использование библиотеки `Recharts` для создания графиков цен на электроэнергию.
 
-### `npm run eject`
+  > _Recharts - это библиотека графиков на основе React. Она предоставляет широкий выбор компонентов для создания различных типов графиков, таких как линейные, столбчатые, круговые и другие. Библиотека легко настраивается и интегрируется с React-приложениями._
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```jsx
+<LineChart width={500} height={300} data={data}>
+  <XAxis dataKey="name" />
+  <YAxis />
+  <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+  <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+  <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
+</LineChart>
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- ### Использование библиотеки `React Router` для навигации по страницам приложения.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  > _React Router - это библиотека маршрутизации для React-приложений. Она позволяет управлять переходами между различными страницами и компонентами в приложении, а также передавать параметры в адресной строке. React Router обеспечивает быстрое и удобное управление навигацией в приложении._
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```jsx
+import { Routes, Route } from 'react-router-dom';
+import About from './About';
+import ElektriKell from './ElektriKell';
 
-## Learn More
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<ElektriKell />} />
+      <Route path="/:activePrice" element={<ElektriKell />} />
+      <Route path="/low/:durationParam" element={<ElektriKell />} />
+      <Route path="/about" element={<About />} />
+    </Routes>
+  );
+}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+export default App;
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ### Использование `Redux Toolkit` для управления состоянием приложения.
+  > _Redux Toolkit - это библиотека для упрощения работы с Redux в React-приложениях. Она предоставляет удобные функции для создания и управления Redux-хранилищем, а также уменьшает количество бойлерплейта при написании кода на Redux. Redux Toolkit делает работу с Redux более удобной и быстрой._
 
-### Code Splitting
+```jsx
+import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+const initaState = {
+  hourRange: 1,
+  lowPriceTimestamp: null,
+  showForm: false,
+  errorMessage: null,
+};
 
-### Analyzing the Bundle Size
+export const setHourRange = createAction('setHourRange');
+export const setLowPriceTimestamp = createAction('setLowPriceTimestamp');
+export const setShowForm = createAction('setShowForm');
+export const setErrorMessage = createAction('setErrorMessage');
+export const setSearchDate = createAction('setSearchDate');
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+const reducer = createReducer(initaState, {
+  [setHourRange]: (state, action) => {
+    state.hourRange = action.payload;
+  },
 
-### Making a Progressive Web App
+  [setLowPriceTimestamp]: (state, action) => {
+    state.lowPriceTimestamp = action.payload;
+  },
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  [setShowForm]: (state, action) => {
+    state.showForm = action.payload;
+  },
 
-### Advanced Configuration
+  [setErrorMessage]: (state, action) => {
+    state.errorMessage = action.payload;
+  },
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  [setSearchDate]: (state, action) => {
+    state.searchDate = action.payload;
+  },
+});
 
-### Deployment
+export const store = configureStore({ reducer });
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- ### Использование `Bootstrap` для ускорения разработки и создания адаптивного интерфейса.
+  > _Bootstrap - это фреймворк для веб-разработки, предоставляющий набор инструментов для создания современных и адаптивных веб-сайтов и веб-приложений. Он включает в себя готовые компоненты и шаблоны, написанные на HTML, CSS и JavaScript, которые упрощают создание качественного пользовательского интерфейса._
 
-### `npm run build` fails to minify
+```jsx
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import { setErrorMessage } from './services/stateService';
+import { useSelector, useDispatch } from 'react-redux';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+function ErrorModal() {
+  const handleClose = () => dispatch(setErrorMessage(null));
+
+  const errorMessage = useSelector((state) => state.errorMessage);
+  const dispatch = useDispatch();
+
+  return (
+    <Modal show={!!errorMessage} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Error</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{errorMessage}</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+export default ErrorModal;
+```
+
+# Установка и запуск
+
+**Чтобы запустить приложение, выполните следующие действия:**
+
+- Клонируйте репозиторий на свой компьютер.
+
+- Установите зависимости, выполнив команду `npm install`.
+
+- Запустите приложение, выполнив команду `npm start`.
+
+---
+
+---
+
+---
