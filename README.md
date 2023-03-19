@@ -8,6 +8,8 @@
 ![visual code](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 ![visual code](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
+![ScreenElektrikell](https://user-images.githubusercontent.com/121131393/226214266-846abb4e-3074-4a98-a325-8360b1d5f0d5.gif)
+
 Веб-приложение, разработанное на [React.js](https://github.com/reactjs) с использованием библиотек [Moment.js](https://momentjs.com/), [Recharts](https://recharts.org/), [React Router](https://reactrouter.com/en/main) и [Redux Toolkit](https://redux-toolkit.js.org/), которое позволяет пользователю просматривать цену на электроэнергию в определенное время и выбирать диапазон времени, чтобы увидеть самое низкое и самое высокое время цены на электроэнергию.
 
 В проекте также использовались [Sass](https://sass-lang.com/) и [Bootstrap](https://getbootstrap.com/) для стилизации интерфейса, а также асинхронные запросы API с сайта [elering.ee](elering.ee) для получения данных о цене на электроэнергию.
