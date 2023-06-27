@@ -13,7 +13,7 @@ function Durations() {
   const hourRange = useSelector((state) => state.hourRange);
   const dispatch = useDispatch();
 
-  const durations = [1, 2, 3, 4, 5, 6, 7, 8];
+  const durations = [1, 2, 3, 4, 6, 8];
 
   const handleClick = (duration) => {
     if (durationParam) {
@@ -28,7 +28,7 @@ function Durations() {
         {durations.map(duration => {
           const selectedDuration = durationParam ? + durationParam : hourRange
           return (
-            <Button
+            <Button className='m-1 rounded'
               key={duration}
               active={duration === selectedDuration}
               onClick={() => handleClick(duration)}>

@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ReferenceArea, ResponsiveContainer, LineChart } from 'recharts';
 import { rangePricesGenerate } from '../helpers/rangePrices';
+import { useSelector, useDispatch } from 'react-redux';
+import { setXHign } from '../services/stateService';
 
 
 function AreaHign({ data, children }) {
 
-  const [xHign, setXHign] = useState(null);
+  const xHign = useSelector((state) => state.xHign);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (!data) return;
@@ -18,9 +21,9 @@ function AreaHign({ data, children }) {
     });
     let avereagePrice = sum / maxRangePrices.length;
     maxRangePrices.filter(v => v.sum > avereagePrice)
-    setXHign(maxRangePrices.filter(v => v.sum > avereagePrice));
+    dispatch(setXHign(maxRangePrices.filter(v => v.sum > avereagePrice)));
 
-  }, [data]);
+  }, [data, dispatch]);
 
   const currentIndex = data?.findIndex((el) => el.current);
 

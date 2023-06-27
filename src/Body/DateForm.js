@@ -51,7 +51,6 @@ function DateForm({ setSearchDate }) {
       pastHours: currentDate.diff(start, 'hours'),
     })
   };
-
   return (
     <>
       <Offcanvas show={show} onHide={handleClose}>
@@ -65,7 +64,7 @@ function DateForm({ setSearchDate }) {
               <Form.Control
                 name="start"
                 type="datetime-local"
-                placeholder="start date"
+                placeholder="dd/mm/yyyy"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">

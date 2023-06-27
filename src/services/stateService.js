@@ -11,7 +11,8 @@ export const setHourRange = createAction("setHourRange");
 export const setLowPriceTimestamp = createAction("setLowPriceTimestamp");
 export const setShowForm = createAction("setShowForm");
 export const setErrorMessage = createAction("setErrorMessage");
-export const setSearchDate = createAction("setSearchDate")
+export const setSearchDate = createAction("setSearchDate");
+export const setXHign = createAction("setXHigh");
 
 const reducer = createReducer(initaState, {
 
@@ -33,6 +34,9 @@ const reducer = createReducer(initaState, {
 
     [setSearchDate]: (state, action) => {
         state.searchDate = action.payload
+    },
+    [setXHign]: (state, action) => {
+        state.xHign = action.payload
     }
 });
 
